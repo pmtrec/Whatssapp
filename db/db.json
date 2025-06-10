@@ -1,0 +1,52 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "kasongo@gmail.com",
+      "password": "123456",
+      "name": "Kasongo"
+    },
+    {
+      "id": "2",
+      "email": "test@test.com",
+      "password": "pass",
+      "name": "Testeur"
+    },
+    {
+      "id": "9e99",
+      "name": "Papa Malick TEUW",
+      "email": "kasongoo@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": "5dc2",
+      "name": "Papa",
+      "email": "teuwpapamalick1732@gmail.com",
+      "password": "papa1732"
+    },
+    {
+      "id": "2199",
+      "name": "pmt",
+      "email": "pmt@gmail.com",
+      "password": "pmt123"
+    },
+    {
+      "id": "1f6d",
+      "name": "Papa Malick TEUW",
+      "email": "teuwpapamalick173@gmail.com",
+      "password": "papa"
+    },
+    {
+      "id": "7773",
+      "name": "Papa Malick TEUW",
+      "phone": "771719013",
+      "password": "papa1732"
+    },
+    {
+      "id": "20f0",
+      "name": "Papa Malick TEUW",
+      "phone": "771719014",
+      "password": "papa"
+    }
+  ]
+}
