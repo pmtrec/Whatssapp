@@ -64,7 +64,6 @@ export function renderLogin() {
   signupLink.className = "text-green-600 hover:underline";
   signupLink.addEventListener("click", (e) => {
     e.preventDefault();
-    document.querySelector("#app").innerHTML = "";
     router("/inscription");
   });
   bottomText.textContent = "Vous n'avez pas de compte ? ";
@@ -104,8 +103,12 @@ export function renderLogin() {
           errorMsg.textContent = "❌ Numéro ou mot de passe incorrect.";
         }
       })
+      
       .catch(err => {
+         console.log("papa");
         console.error("Erreur serveur :", err);
+       
+        
         errorMsg.textContent = "Erreur de connexion au serveur.";
       });
   });

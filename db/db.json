@@ -47,6 +47,44 @@
       "name": "Papa Malick TEUW",
       "phone": "771719014",
       "password": "papa"
+    },
+    {
+      "id": "f771",
+      "name": "Étudiants",
+      "phone": "+221762728652",
+      "password": "papa"
+    }
+  ],
+  "contacts": [
+    {
+      "id": 1,
+      "name": "Marie Dupont",
+      "avatar": "/images/marie.png",
+      "lastMessage": "À bientôt !",
+      "lastMessageTime": "15:12",
+      "unreadCount": 2
+    },
+    {
+      "id": 2,
+      "name": "Jean Martin",
+      "avatar": "/images/jean.png",
+      "lastMessage": "C'est bon pour demain.",
+      "lastMessageTime": "13:42",
+      "unreadCount": 0
+    },
+    {
+      "id": "98ed",
+      "name": "Papa Malick TEUW",
+      "phone": "+221771719013",
+      "email": "teuwpapamalick173@gmail.com",
+      "status": "Q"
+    },
+    {
+      "id": "a7c5",
+      "name": "Papa Malick TEUW",
+      "phone": "+221771719013",
+      "email": "pppttt1732@gmail.com",
+      "status": "ligne"
     }
   ]
 }
