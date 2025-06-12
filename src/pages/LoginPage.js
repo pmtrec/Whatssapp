@@ -1,12 +1,13 @@
-import { BASE_URL } from "../app";
 import { router } from "../router";
 
 export function renderLogin() {
   const user = sessionStorage.getItem("user");
-  if (user) {
-    router("/home");
-    return;
-  }
+ if (user) {
+  router("/home");
+  // ✅ Retourne un élément vide pour éviter l'erreur
+  return document.createElement("div");
+}
+
 
   const element = document.createElement("div");
   element.className = "min-h-screen flex items-center justify-center bg-gray-100";
@@ -21,7 +22,7 @@ export function renderLogin() {
   const form = document.createElement("form");
   form.className = "space-y-4";
 
-  // Téléphone
+  
   const phoneGroup = document.createElement("div");
   const phoneLabel = document.createElement("label");
   phoneLabel.textContent = "Numéro de téléphone";
@@ -91,7 +92,7 @@ export function renderLogin() {
       return;
     }
 
-    fetch(`${BASE_URL}/users`)
+    fetch("http://localhost:3000/users")
       .then(res => res.json())
       .then(users => {
         const foundUser = users.find(user =>

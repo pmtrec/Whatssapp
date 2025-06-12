@@ -1,5 +1,7 @@
+
 import { router } from "../router";
 import { getContacts } from "../services/api";
+import { renderContactList } from "./home/ContactList";
 import {
   ChatIcon,
   StatusIcon,
@@ -12,38 +14,10 @@ import {
   ArchiveIcon,
   LockIcon
 } from "./home/icone";
-
-
 export async function renderHome() {
   const contacts = await getContacts();
 
-  const contactListHTML = contacts.map((contact) => `
-    <div class="px-4 py-3 flex items-center space-x-3 cursor-pointer hover:bg-gray-700 border-b border-gray-600">
-      <img
-        src="${contact.avatar || '/placeholder.svg?height=50&width=50'}"
-        alt="${contact.name}"
-        class="w-12 h-12 rounded-full object-cover"
-      />
-      <div class="flex-1 min-w-0">
-        <div class="flex items-center justify-between">
-          <h3 class="text-white font-medium text-sm truncate">${contact.name}</h3>
-          <span class="text-gray-400 text-xs">${contact.lastMessageTime || '00:00'}</span>
-        </div>
-        <div class="flex items-center justify-between mt-1">
-          <p class="text-gray-400 text-sm truncate">${contact.lastMessage || '...'}</p>
-          ${
-            contact.unreadCount > 0
-              ? `<div class="flex items-center space-x-1">
-                  <span class="w-2 h-2 bg-green-500 rounded-full"></span>
-                  <span class="bg-green-500 text-white text-xs rounded-full px-1.5 py-0.5 font-bold">${contact.unreadCount}</span>
-                </div>`
-              : ""
-          }
-        </div>
-      </div>
-    </div>
-  `).join('');
-
+const contactListElement = renderContactList(contacts);
   const element = document.createElement("div");
   element.innerHTML = `
     <div class="bg-gray-900 h-screen overflow-hidden font-sans">
@@ -118,7 +92,8 @@ export async function renderHome() {
               ${ArchiveIcon}
               <span class="text-sm">Archivées</span>
             </div>
-            ${contactListHTML}
+            <div id="contact-list-placeholder"></div>
+
           </div>
       </div>
 
@@ -141,6 +116,11 @@ export async function renderHome() {
       </div>
     </div>
   `;
+  const placeholder = element.querySelector("#contact-list-placeholder");
+   if (placeholder) {
+  placeholder.replaceWith(contactListElement);
+   }
+
 
   const NewChatIco = element.querySelector("#NewChatIco");
   if (NewChatIco) {
