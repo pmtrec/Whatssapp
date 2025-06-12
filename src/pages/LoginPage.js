@@ -1,3 +1,4 @@
+import { BASE_URL } from "../app";
 import { router } from "../router";
 
 export function renderLogin() {
@@ -90,7 +91,7 @@ export function renderLogin() {
       return;
     }
 
-    fetch("https://backwhat-jo3k.onrender.com")
+    fetch(`${BASE_URL}/users`)
       .then(res => res.json())
       .then(users => {
         const foundUser = users.find(user =>
