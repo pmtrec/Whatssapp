@@ -1,18 +1,3 @@
-// export const handleEscape = (e) => {
-//   if (e.key === "Escape") {
-//     element.remove(); // Au lieu de juste router("/home")
-//     router("/home");
-//     document.removeEventListener("keydown", handleEscape);
-//   }
-// };
-
-// // Pour fermer en cliquant à l'extérieur
-// element.addEventListener("click", (e) => {
-//   if (e.target === element) {
-//     element.remove(); // Au lieu de juste router("/home")
-//     router("/home");
-//   }
-// });
 
 export function showAppMessage(message, type = 'info') {
   const messageContainer = document.createElement("div");

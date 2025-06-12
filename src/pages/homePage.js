@@ -84,19 +84,19 @@ export async function renderHome() {
         </div>
 
         <!-- Chat List -->
-        <div class="w-[500px] bg flex flex-col">
+        <div id="page" class=" flex flex-col ">
           <div class="bg-gray-900 p-4 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-              <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
-                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <!-- (icône SVG WhatsApp) -->
-                </svg>
+              <div class="full flex items-center justify-center">
+              
               </div>
               <h1 class="text-white text-xl font-medium">WhatsApp</h1>
             </div>
             <div class="flex items-center space-x-8 text-gray-300">
+            <button id="NewChatIco" class="cursor-pointer">
               ${NewChatIcon}
-              <button id="menu_icon" class="cursor-pointer">
+                 </button>
+              <button id="a" " class="cursor-pointer">
                 ${MenuIcon}
               </button>
             </div>
@@ -118,13 +118,12 @@ export async function renderHome() {
               ${ArchiveIcon}
               <span class="text-sm">Archivées</span>
             </div>
-
             ${contactListHTML}
           </div>
-        </div>
+      </div>
 
         <!-- Main Content -->
-        <div class="flex-1 bg-gray-800 flex items-center justify-center">
+        <div id="main" class="flex-1 bg-gray-800 flex items-center justify-center">
           <div class="text-center max-w-md">
             <h2 class="text-2xl font-light text-white mb-4">WhatsApp Web</h2>
             <p class="text-gray-300 text-sm leading-relaxed mb-2">
@@ -143,11 +142,18 @@ export async function renderHome() {
     </div>
   `;
 
-  const menuIcon = element.querySelector("#menu_icon");
-  if (menuIcon) {
-    menuIcon.addEventListener("click", () => {
-      console.log("✅ Menu cliqué !");
+  const NewChatIco = element.querySelector("#NewChatIco");
+  if (NewChatIco) {
+    NewChatIco.addEventListener("click", () => {
+  
       router("/menu");
+    });
+  }
+    const N = element.querySelector("#a");
+  if (N) {
+    N.addEventListener("click", () => {
+  
+      router("/discusion");
     });
   }
 

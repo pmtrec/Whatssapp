@@ -2,61 +2,143 @@ import { router } from "../router";
 import { showAppConfirm, showAppMessage } from "../utils/function.utils";
 
 const MENU_OPTIONS = [
-  { label: "➕ Nouveau contact", action: "new-contact" },
-  { label: "👥 Nouveau groupe", action: "new-group" },
-  { label: "🟢 Statut", action: "status" },
-  { label: "⚙️ Paramètres", action: "settings" },
-  { label: "📁 Médias, liens et docs", action: "media" },
-  { label: "⭐ Messages importants", action: "starred" },
-  { label: "🚪 Déconnexion", action: "logout", isDanger: true },
+  { label: "Nouveau groupe", action: "new-group", icon: "👥" },
+  { label: "Nouveau contact", action: "new-contact", icon: "👤" },
+  { label: "Nouvelle communauté", action: "new-community", icon: "👥" },
+  { label: "Statut", action: "status", icon: "🟢" },
+  { label: "Déconnexion", action: "logout", isDanger: true, icon: "🚪" },
 ];
 
 function createMenuCard() {
-  const card = document.createElement("div");
-  card.className = "w-full max-w-sm bg-white rounded-xl shadow-2xl p-6 mx-4 transform transition-all duration-300";
+  const container = document.createElement("div");
+  container.className = " bg-white h-full flex flex-col";
   
-  const title = document.createElement("h2");
-  title.className = "text-xl font-bold text-center text-green-600 mb-6";
-  title.textContent = "Menu WhatsApp";
+  // Header avec titre et bouton retour
+  const header = createHeader();
   
-  const backButton = createBackButton();
-  const menuList = createMenuList();
+  // Search bar
+  const searchSection = createSearchSection();
   
-  card.append(title, backButton, menuList);
-  return card;
+  // Menu options
+  const menuSection = createMenuSection();
+  
+  container.append(header, searchSection, menuSection);
+
+  return container;
+
 }
 
-function createBackButton() {
-  const button = document.createElement("button");
-  button.className = "w-full text-left px-4 py-3 mb-4 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors duration-200 flex items-center";
-  button.textContent = "Retour";
+function createHeader() {
+  const header = document.createElement("div");
+  header.className = "flex items-center bg-green-500 text-white px-4 py-3 shadow-md";
   
-  button.addEventListener("click", (e) => {
+  const backButton = document.createElement("button");
+  backButton.innerHTML = "←";
+  backButton.className = "text-2xl mr-4 p-1 hover:bg-green-600 rounded-full transition-colors";
+  backButton.addEventListener("click", (e) => {
     e.stopPropagation();
     closeMenu();
   });
   
-  return button;
+  const title = document.createElement("h1");
+  title.textContent = "Nouvelle discussion";
+  title.className = "text-lg font-medium";
+  
+  header.append(backButton, title);
+  return header;
 }
 
-function createMenuList() {
-  const ul = document.createElement("ul");
-  ul.className = "space-y-2";
+function createSearchSection() {
+  const section = document.createElement("div");
+  section.className = "px-4 py-3 bg-white border-b border-gray-200";
   
-  MENU_OPTIONS.forEach(opt => {
-    const li = document.createElement("li");
-    li.textContent = opt.label;
-    li.className = `block w-full text-left px-4 py-3 rounded-lg cursor-pointer transition-all duration-200 ${
-      opt.isDanger 
-        ? "bg-red-50 text-red-600 hover:bg-red-100 hover:shadow-md" 
-        : "bg-gray-50 hover:bg-green-50 hover:text-green-600 hover:shadow-md"
-    }`;
+  const searchContainer = document.createElement("div");
+  searchContainer.className = "relative";
+  
+  const searchInput = document.createElement("input");
+  searchInput.type = "text";
+  searchInput.placeholder = "Rechercher un nom ou un numéro";
+  searchInput.className = "w-full pl-10 pr-4 py-2 border-2 border-green-400 rounded-full bg-gray-50 text-gray-700 placeholder-gray-500 focus:outline-none focus:border-green-500";
+  
+  const searchIcon = document.createElement("div");
+  searchIcon.innerHTML = "🔍";
+  searchIcon.className = "absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400";
+  
+  searchContainer.append(searchIcon, searchInput);
+  section.appendChild(searchContainer);
+  return section;
+}
+function createMenuSection() {
+  const section = document.createElement("div");
+  section.className = "flex-1 bg-white";
+
+  
+  // Menu options avec icônes circulaires
+  MENU_OPTIONS.forEach((opt, index) => {
+    const menuItem = createMenuItem(opt);
+    section.appendChild(menuItem);
     
-    li.addEventListener("click", () => handleMenuAction(opt.action));
-    ul.appendChild(li);
+    // Ajouter une ligne de séparation après les 3 premiers éléments
+    if (index === 2) {
+      const separator = document.createElement("div");
+      separator.className = "px-4 py-2";
+      
+      const separatorText = document.createElement("p");
+      separatorText.textContent = "Contacts sur WhatsApp";
+      separatorText.className = "text-sm text-gray-500 font-medium";
+      
+      separator.appendChild(separatorText);
+      section.appendChild(separator);
+    }
   });
+  return section;
+}
+
+function createMenuItem(option) {
+  const item = document.createElement("div");
+  item.className = "flex items-center px-4 py-3 hover:bg-gray-50 cursor-pointer transition-colors duration-200 border-b border-gray-100";
   
-  return ul;
+  // Icône circulaire
+  const iconContainer = document.createElement("div");
+  iconContainer.className = `w-12 h-12 rounded-full flex items-center justify-center mr-4 ${
+    option.action === 'new-group' ? 'bg-green-500' :
+    option.action === 'new-contact' ? 'bg-green-500' :
+    option.action === 'new-community' ? 'bg-green-500' :
+    option.isDanger ? 'bg-red-500' : 'bg-gray-400'
+  }`;
+  
+  const icon = document.createElement("span");
+  icon.className = "text-white text-lg";
+  icon.innerHTML = getIconForAction(option.action);
+  
+  iconContainer.appendChild(icon);
+  
+  // Texte
+  const textContainer = document.createElement("div");
+  textContainer.className = "flex-1";
+  
+  const label = document.createElement("p");
+  label.textContent = option.label;
+  label.className = `text-base ${option.isDanger ? 'text-red-600' : 'text-gray-900'} font-medium`;
+  
+  textContainer.appendChild(label);
+  
+  // Event listener
+  item.addEventListener("click", () => handleMenuAction(option.action));
+  
+  item.append(iconContainer, textContainer);
+  return item;
+}
+
+function getIconForAction(action) {
+  const icons = {
+    'new-group': '👥',
+    'new-contact': '👤',
+    'new-community': '👥',
+    'status': '🟢',
+    'logout': '🚪'
+  };
+  return icons[action] || '⚙️';
 }
 
 function handleMenuAction(action) {
@@ -64,12 +146,24 @@ function handleMenuAction(action) {
     case "new-contact":
       router("/new-contact");
       break;
+    case "new-group":
+      showAppMessage("🔧 Fonctionnalité à implémenter : Nouveau groupe", "info");
+      router("/home");
+      break;
+    case "new-community":
+      showAppMessage("🔧 Fonctionnalité à implémenter : Nouvelle communauté", "info");
+      router("/home");
+      break;
+    case "status":
+      showAppMessage("🔧 Fonctionnalité à implémenter : Statut", "info");
+      router("/home");
+      break;
     case "logout":
       handleLogout();
       break;
     default:
       showAppMessage(`🔧 Fonctionnalité à implémenter : ${action}`, "info");
-      if (action !== "logout") router("/home");
+      router("/home");
   }
 }
 
@@ -77,8 +171,8 @@ function handleLogout() {
   showAppConfirm(
     "Êtes-vous sûr de vouloir vous déconnecter ?",
     () => {
-      localStorage.removeItem("user");
-      localStorage.removeItem("authToken");
+      sessionStorage.removeItem("user");
+      sessionStorage.removeItem("authToken");
       document.querySelector("#app").innerHTML = "";
       showAppMessage("✅ Déconnexion réussie", "success");
       router("/login");
@@ -90,30 +184,14 @@ function handleLogout() {
 }
 
 function closeMenu() {
-  const menuElement = document.querySelector(".bg-gray-900.bg-opacity-50");
-  if (menuElement) {
-    menuElement.remove();
-  }
   router("/home");
 }
 
 export function renderMenuPage() {
-  const element = document.createElement("div");
-  element.className = "min-h-screen bg-gray-900 bg-opacity-50 flex flex-col items-center justify-center fixed inset-0 z-50";
-  
-  const card = createMenuCard();
-  element.appendChild(card);
-  
-  // Fermer le menu en cliquant à l'extérieur ou avec Escape
-  element.addEventListener("click", (e) => e.target === element && closeMenu());
+  const element = createMenuCard();
+
   document.addEventListener("keydown", (e) => e.key === "Escape" && closeMenu());
   
-  // Animation d'entrée
-  requestAnimationFrame(() => {
-    card.style.transition = "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)";
-    card.style.transform = "translateY(0) scale(1)";
-    card.style.opacity = "1";
-  });
   
   return element;
 }

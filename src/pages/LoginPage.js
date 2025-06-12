@@ -1,6 +1,12 @@
 import { router } from "../router";
 
 export function renderLogin() {
+  const user = sessionStorage.getItem("user");
+  if (user) {
+    router("/home");
+    return;
+  }
+
   const element = document.createElement("div");
   element.className = "min-h-screen flex items-center justify-center bg-gray-100";
 
@@ -22,7 +28,7 @@ export function renderLogin() {
   const phoneInput = document.createElement("input");
   phoneInput.type = "tel";
   phoneInput.required = true;
-  phoneInput.placeholder = "Ex: +243 000 000 000"
+  phoneInput.placeholder = "Ex: +243 000 000 000";
   phoneInput.className = "mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500";
   phoneGroup.appendChild(phoneLabel);
   phoneGroup.appendChild(phoneInput);
@@ -55,27 +61,23 @@ export function renderLogin() {
   form.appendChild(btnConnecter);
   form.appendChild(errorMsg);
 
-  // Inscription
+  // Lien d'inscription
   const bottomText = document.createElement("p");
   bottomText.className = "text-sm text-center text-gray-500 mt-6";
-  const signupLink = document.createElement("a");
-  signupLink.href = "#";
-  signupLink.textContent = "Inscrivez-vous";
-  signupLink.className = "text-green-600 hover:underline";
-  signupLink.addEventListener("click", (e) => {
+  bottomText.innerHTML = `Vous n'avez pas de compte ? <a href="#" class="text-green-600 hover:underline" id="signupLink">Inscrivez-vous</a>`;
+
+  // Gestion du lien
+  bottomText.querySelector("#signupLink").addEventListener("click", (e) => {
     e.preventDefault();
     router("/inscription");
   });
-  bottomText.textContent = "Vous n'avez pas de compte ? ";
-  bottomText.appendChild(signupLink);
 
   box.appendChild(title);
   box.appendChild(form);
   box.appendChild(bottomText);
-
   element.appendChild(box);
 
-  // ⚙️ Action de connexion
+  // Soumission du formulaire
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -96,19 +98,15 @@ export function renderLogin() {
         );
 
         if (foundUser) {
-          console.log("Connecté :", foundUser);
+          sessionStorage.setItem("user", JSON.stringify(foundUser));
           document.querySelector("#app").innerHTML = "";
           router("/home");
         } else {
           errorMsg.textContent = "❌ Numéro ou mot de passe incorrect.";
         }
       })
-      
       .catch(err => {
-         console.log("papa");
         console.error("Erreur serveur :", err);
-       
-        
         errorMsg.textContent = "Erreur de connexion au serveur.";
       });
   });

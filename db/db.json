@@ -1,36 +1,6 @@
 {
   "users": [
     {
-      "id": "1",
-      "email": "kasongo@gmail.com",
-      "password": "123456",
-      "name": "Kasongo"
-    },
-    {
-      "id": "2",
-      "email": "test@test.com",
-      "password": "pass",
-      "name": "Testeur"
-    },
-    {
-      "id": "9e99",
-      "name": "Papa Malick TEUW",
-      "email": "kasongoo@gmail.com",
-      "password": "123456"
-    },
-    {
-      "id": "5dc2",
-      "name": "Papa",
-      "email": "teuwpapamalick1732@gmail.com",
-      "password": "papa1732"
-    },
-    {
-      "id": "2199",
-      "name": "pmt",
-      "email": "pmt@gmail.com",
-      "password": "pmt123"
-    },
-    {
       "id": "1f6d",
       "name": "Papa Malick TEUW",
       "email": "teuwpapamalick173@gmail.com",
@@ -53,11 +23,23 @@
       "name": "Étudiants",
       "phone": "+221762728652",
       "password": "papa"
+    },
+    {
+      "id": "ba1f",
+      "name": "diewrign",
+      "phone": "771212222",
+      "password": "AAAA"
+    },
+    {
+      "id": "8a21",
+      "name": "Étudiants",
+      "phone": "771212223",
+      "password": "pppp"
     }
   ],
   "contacts": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Marie Dupont",
       "avatar": "/images/marie.png",
       "lastMessage": "À bientôt !",
@@ -65,7 +47,7 @@
       "unreadCount": 2
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Jean Martin",
       "avatar": "/images/jean.png",
       "lastMessage": "C'est bon pour demain.",
@@ -85,6 +67,34 @@
       "phone": "+221771719013",
       "email": "pppttt1732@gmail.com",
       "status": "ligne"
+    },
+    {
+      "id": "2dec",
+      "name": "Papa Malick TEUW",
+      "phone": "+221771719013",
+      "email": "teuwpapamalick173@gmail.com",
+      "status": "ss"
+    },
+    {
+      "id": "f23b",
+      "name": "Papa Malick TEUW",
+      "phone": "+221771719013",
+      "email": "teuwpapamalick1732@gmail.com",
+      "status": "ligne"
+    },
+    {
+      "id": "0fac",
+      "name": "dtfghjkl",
+      "phone": "+22177777777",
+      "email": "pmt@gmail.com",
+      "status": "fgyhjk"
+    },
+    {
+      "id": "8977",
+      "name": "kasongà",
+      "phone": "+222177111111",
+      "email": "papa@gmail.com",
+      "status": "en ligne"
     }
   ]
 }
