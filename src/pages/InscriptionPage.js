@@ -86,7 +86,8 @@ export function renderInscription() {
         return;
       }
 
-      await fetch("https://backwhat-jo3k.onrender.coms", {
+    await fetch("https://backwhat-jo3k.onrender.com/users", {
+
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, phone, password }),
