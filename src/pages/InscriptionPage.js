@@ -76,7 +76,7 @@ export function renderInscription() {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/users");
+      const res = await fetch("https://projet-json-server-2-acqb.onrender.com/users");
       const users = await res.json();
       const phoneExists = users.find(user => user.phone === phone);
 
@@ -86,7 +86,7 @@ export function renderInscription() {
         return;
       }
 
-      await fetch("http://localhost:3000/users", {
+      await fetch("https://projet-json-server-2-acqb.onrender.com/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, phone, password }),
